@@ -1,11 +1,18 @@
 class Solution(object):
-    def twoSum(self, nums, target):
-        dict = {}
-        for i in range(len(nums)):
-            needed = target - nums[i]
-            if needed in dict:
-                return [dict[needed], i]
-            else:
-                dict[nums[i]] = i
-
-        
+    def totalFruit(self, fruits):
+        """
+        :type fruits: List[int]
+        :rtype: int
+        """
+        ans = 0
+        left = 0
+        count = {}
+        for right in range(len(fruits)):
+            count[fruits[right]] = count.get(fruits[right], 0) + 1
+            while len(count) > 2:
+                count[fruits[left]] -= 1
+                if count[fruits[left]] == 0:
+                    count.pop(fruits[left])
+                left += 1
+            ans = max(ans, right - left + 1)
+        return ans
