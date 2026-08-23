@@ -1,18 +1,17 @@
 class Solution(object):
-    def totalFruit(self, fruits):
+    def maxScore(self, cardPoints, k):
         """
-        :type fruits: List[int]
+        :type cardPoints: List[int]
+        :type k: int
         :rtype: int
         """
-        ans = 0
-        left = 0
-        count = {}
-        for right in range(len(fruits)):
-            count[fruits[right]] = count.get(fruits[right], 0) + 1
-            while len(count) > 2:
-                count[fruits[left]] -= 1
-                if count[fruits[left]] == 0:
-                    count.pop(fruits[left])
-                left += 1
-            ans = max(ans, right - left + 1)
-        return ans
+        n = len(cardPoints)
+        total = sum(cardPoints)
+        window = n-k
+        min_sum = sum(cardPoints[:window])
+        curr_sum = min_sum
+        for i in range(window, n):
+            curr_sum = (curr_sum - cardPoints[i-window]) + cardPoints[i]
+            min_sum = min(min_sum, curr_sum)
+        return total - min_sum
+        
