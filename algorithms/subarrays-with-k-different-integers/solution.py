@@ -1,17 +1,28 @@
 class Solution(object):
-    def maxScore(self, cardPoints, k):
+    def subarraysWithKDistinct(self, nums, k):
         """
-        :type cardPoints: List[int]
+        :type nums: List[int]
         :type k: int
         :rtype: int
         """
-        n = len(cardPoints)
-        total = sum(cardPoints)
-        window = n-k
-        min_sum = sum(cardPoints[:window])
-        curr_sum = min_sum
-        for i in range(window, n):
-            curr_sum = (curr_sum - cardPoints[i-window]) + cardPoints[i]
-            min_sum = min(min_sum, curr_sum)
-        return total - min_sum
+        def atMost(k):
+
+            count = 0
+            left = 0
+            freq = {}
+            for right in range(len(nums)):
+                freq[nums[right]] = freq.get(nums[right], 0) + 1
+                while len(freq) > k:
+                    freq[nums[left]] -= 1
+                    if freq[nums[left]] == 0:
+                        del freq[nums[left]] 
+                    left += 1
+                count += right - left + 1
+
+            return count
+        return atMost(k) - atMost(k-1)
         
+
+            
+
+         
