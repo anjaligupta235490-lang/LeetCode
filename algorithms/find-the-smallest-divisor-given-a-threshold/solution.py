@@ -1,28 +1,21 @@
 class Solution(object):
-    def subarraysWithKDistinct(self, nums, k):
+    def smallestDivisor(self, nums, threshold):
         """
         :type nums: List[int]
-        :type k: int
+        :type threshold: int
         :rtype: int
         """
-        def atMost(k):
-
-            count = 0
-            left = 0
-            freq = {}
-            for right in range(len(nums)):
-                freq[nums[right]] = freq.get(nums[right], 0) + 1
-                while len(freq) > k:
-                    freq[nums[left]] -= 1
-                    if freq[nums[left]] == 0:
-                        del freq[nums[left]] 
-                    left += 1
-                count += right - left + 1
-
-            return count
-        return atMost(k) - atMost(k-1)
-        
-
+        low = 1
+        high = max(nums)
+        while low <= high:
+            mid = (low + high)//2
+            total = 0
+            for num in nums:
+                total += (num + mid - 1)//mid
+            if total <= threshold:
+                ans = mid
+                high = mid - 1
+            else:
+                low = mid + 1
+        return ans
             
-
-         
