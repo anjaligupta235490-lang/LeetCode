@@ -1,21 +1,22 @@
 class Solution(object):
-    def smallestDivisor(self, nums, threshold):
+    def findContentChildren(self, g, s):
         """
-        :type nums: List[int]
-        :type threshold: int
+        :type g: List[int]
+        :type s: List[int]
         :rtype: int
         """
-        low = 1
-        high = max(nums)
-        while low <= high:
-            mid = (low + high)//2
-            total = 0
-            for num in nums:
-                total += (num + mid - 1)//mid
-            if total <= threshold:
-                ans = mid
-                high = mid - 1
+        g.sort()
+        s.sort()
+        i = 0
+        j = 0
+        count = 0
+        while i < len(g) and j < len(s):
+            if s[j] >= g[i]:
+                count += 1
+                i += 1
+                j += 1
             else:
-                low = mid + 1
-        return ans
-            
+                j += 1
+        return count
+
+
