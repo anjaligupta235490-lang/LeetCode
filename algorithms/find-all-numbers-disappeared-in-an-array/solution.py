@@ -1,22 +1,24 @@
 class Solution(object):
-    def findContentChildren(self, g, s):
+    def findDisappearedNumbers(self, nums):
         """
-        :type g: List[int]
-        :type s: List[int]
-        :rtype: int
+        :type nums: List[int]
+        :rtype: List[int]
         """
-        g.sort()
-        s.sort()
+        n = len(nums)
         i = 0
-        j = 0
-        count = 0
-        while i < len(g) and j < len(s):
-            if s[j] >= g[i]:
-                count += 1
-                i += 1
-                j += 1
+        while i < n:
+            correct = nums[i] -1
+            if nums[i] != nums[correct]:
+                nums[i], nums[correct] = nums[correct], nums[i]
             else:
-                j += 1
-        return count
+                i += 1
+
+        arr = []
+
+        for i in range(n):
+            if nums[i] != i+1:
+                arr.append(i+1)
+        return arr
 
 
+        
