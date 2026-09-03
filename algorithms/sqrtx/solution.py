@@ -1,28 +1,12 @@
 class Solution(object):
-    def wordPattern(self, pattern, s):
+    def mySqrt(self, x):
         """
-        :type pattern: str
-        :type s: str
-        :rtype: bool
+        :type x: int
+        :rtype: int
         """
-        dic = {}
-        used = set()
-        words = s.split()
-        if len(pattern) != len(words):
-            return False
-        for i in range(len(pattern)):
-            letter = pattern[i]
-            word = words[i]
-            if letter in dic:
-                if dic[letter] != word:
-                    return False
-            else:
-                if word in used:
-                    return False
-
-            
-                dic[letter] = word
-                used.add(word)
-        return True
+        i = 1
+        while i*i <= x:
+            i += 1
+        return i-1
 
         
