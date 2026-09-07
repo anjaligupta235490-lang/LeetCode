@@ -1,21 +1,15 @@
 class Solution {
-    public int[] sortedSquares(int[] nums) {
-        int n = nums.length;
-        int[] ans = new int[n];
-        int left = 0;
-        int right = n-1;
-        for(int i= n-1 ; i >= 0; i--){
-            if(nums[left]*nums[left] > nums[right]*nums[right]){
-                ans[i] = nums[left]*nums[left];
-                left ++;
-
-            }
-            else{
-                ans[i] = nums[right]*nums[right];
-                right --;
+    public boolean isUgly(int n) {
+        if(n <= 0){
+            return false;
+        }
+        int[] factors = {2,3,5};
+        for(int i : factors){
+            while(n%i == 0){
+                n = n/i;
             }
         }
-        return ans;
+        return n == 1;
         
     }
 }
