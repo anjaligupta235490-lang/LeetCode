@@ -1,29 +1,29 @@
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
 class Solution(object):
-    def arrangeCoins(self, n):
+    def detectCycle(self, head):
         """
-        :type n: int
-        :rtype: int
+        :type head: ListNode
+        :rtype: ListNode
         """
-        # row = 0
-        # available = n
-        # required = 1
-        # while available >= required:
-        #     available -= required
-        #     row += 1
-        #     required += 1
-        # return row
-        low = 1
-        high = n
-        while low <= high:
-            mid = (low + high)//2
-            required = mid*(mid+1)//2
-            if required <= n:
-                low = mid + 1
-            else:
-                high = mid - 1
-        return high
-
-
-
-
+        if not head or not head.next:
+            return None
+        slow = head
+        fast = head
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+            if slow == fast:
+                break
+        else:
+            return None
+        slow = head
+        while slow != fast:
+            slow = slow.next
+            fast = fast.next
+        return slow
         
