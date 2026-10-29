@@ -4,8 +4,7 @@ class Solution(object):
         :type n: int
         :rtype: int
         """
-        even = (n+1)//2
-        odd = n//2
+       
         MOD = (10**9) + 7
         def pow(base, exp):
             result = 1
@@ -15,9 +14,7 @@ class Solution(object):
                 base = (base * base) % MOD
                 exp //= 2
             return result
-        a = pow(5, even)
-        b = pow(4, odd)
-        result = (a * b) % MOD
-        return result            
+       
+        return   pow(5, (n+1)//2) * pow(4, n//2) % MOD       
 
          
